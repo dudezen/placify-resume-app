@@ -22,28 +22,119 @@ const AnalysisSchema = z.object({
       rewrites: z.array(z.string()),
     }),
   ),
+  ats_simulation: z.object({
+    parse_score: z.number(),
+    verdict: z.enum(["pass", "borderline", "reject"]),
+    keyword_matches: z.array(
+      z.object({
+        keyword: z.string(),
+        resume_count: z.number(),
+        required: z.boolean(),
+        status: z.enum(["good", "low", "missing", "stuffed"]),
+      }),
+    ),
+    format_flags: z.array(
+      z.object({
+        issue: z.string(),
+        severity: z.enum(["info", "warn", "error"]),
+      }),
+    ),
+    extracted_fields: z.object({
+      name: z.string(),
+      email: z.string(),
+      years_experience: z.string(),
+      skills: z.array(z.string()),
+    }),
+  }),
+  recruiter_view: z.object({
+    decision: z.enum(["yes", "maybe", "no"]),
+    one_liner: z.string(),
+    strengths: z.array(z.string()),
+    concerns: z.array(z.string()),
+    seniority_match: z.string(),
+    story: z.string(),
+  }),
+  career_roadmap: z.array(
+    z.object({
+      skill: z.string(),
+      priority: z.enum(["critical", "high", "medium"]),
+      why_it_matters: z.string(),
+      time_to_ready: z.string(),
+      phases: z.array(
+        z.object({
+          name: z.string(),
+          description: z.string(),
+          duration: z.string(),
+        }),
+      ),
+      resources: z.array(z.string()),
+      resume_bullet_template: z.string(),
+    }),
+  ),
 });
 
 export type Analysis = z.infer<typeof AnalysisSchema>;
 
-const SYSTEM_PROMPT = `You are an expert technical recruiter and resume analyzer.
-Given a RESUME and a JOB DESCRIPTION, analyze the fit and return ONLY valid JSON
-matching this exact schema:
+const SYSTEM_PROMPT = `You are an expert technical recruiter, ATS engineer, and career coach.
+Given a RESUME and a JOB DESCRIPTION, analyze fit and return ONLY valid JSON
+matching this EXACT schema (no markdown fences, no extra fields):
 
 {
-  "overall_score": number (0-100, overall fit),
-  "skill_score": number (0-100, technical skill match),
+  "overall_score": number 0-100,
+  "skill_score": number 0-100,
   "gap_analysis": [
     { "skill": string, "in_resume": boolean, "required": boolean }
-  ],
+  ],  // at least 8 items, mix of matched / missing / bonus
   "suggestions": [
-    { "original": string (a real line from the resume that could be improved),
-      "rewrites": [string, string, string] (3 stronger rewrites using metrics & impact) }
-  ]
+    { "original": string (a real line from the resume),
+      "rewrites": [string, string, string] (3 stronger rewrites with metrics & impact) }
+  ],  // exactly 3 items
+
+  "ats_simulation": {
+    "parse_score": number 0-100,
+    "verdict": "pass" | "borderline" | "reject",
+    "keyword_matches": [
+      { "keyword": string, "resume_count": number, "required": boolean,
+        "status": "good" | "low" | "missing" | "stuffed" }
+    ],  // 6-10 of the most important JD keywords
+    "format_flags": [
+      { "issue": string (concrete parseability note),
+        "severity": "info" | "warn" | "error" }
+    ],  // 3-5 flags
+    "extracted_fields": {
+      "name": string, "email": string,
+      "years_experience": string (e.g. "3 years"),
+      "skills": [string]  // top 8 detected
+    }
+  },
+
+  "recruiter_view": {
+    "decision": "yes" | "maybe" | "no",
+    "one_liner": string (1 sentence verdict),
+    "strengths": [string, string, string],  // exactly 3, tied to JD
+    "concerns": [string, string, string],   // exactly 3 red flags
+    "seniority_match": string (e.g. "Mid-level candidate vs Senior role"),
+    "story": string ("Resume tells the story of a ___")
+  },
+
+  "career_roadmap": [
+    {
+      "skill": string,           // a critical missing/weak skill from the JD
+      "priority": "critical" | "high" | "medium",
+      "why_it_matters": string,  // 1 sentence on JD relevance
+      "time_to_ready": string,   // e.g. "4-6 weeks"
+      "phases": [
+        { "name": "Foundations", "description": string, "duration": string },
+        { "name": "Hands-on Project", "description": string, "duration": string },
+        { "name": "Portfolio Proof", "description": string, "duration": string }
+      ],
+      "resources": [string, string, string],  // 2-3 concrete suggestions
+      "resume_bullet_template": string         // ready-to-paste bullet
+    }
+  ]  // up to 5 items, highest priority first
 }
 
-Include at least 8 skills in gap_analysis covering matched, missing, and bonus skills.
-Provide 3 suggestion items. Return ONLY the JSON object, no markdown fences.`;
+Return ONLY the JSON object.`;
 
 export const analyzeResume = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
