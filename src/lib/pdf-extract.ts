@@ -1,13 +1,10 @@
-// Client-only PDF text extraction using pdfjs-dist.
-import * as pdfjsLib from "pdfjs-dist";
-// Vite-friendly worker import
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-
+// Client-only PDF text extraction. Uses dynamic import so pdfjs-dist
+// never loads during SSR (it references DOMMatrix at module scope).
 export async function extractPdfText(file: File): Promise<string> {
+  const pdfjsLib = await import("pdfjs-dist");
+  const workerSrc = (await import("pdfjs-dist/build/pdf.worker.min.mjs?url")).default;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+
   const buf = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
   const parts: string[] = [];
