@@ -1,10 +1,64 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle2, XCircle, Sparkles, Target, Award, TrendingUp } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { CheckCircle2, XCircle, Sparkles, Target, Award, TrendingUp, ScanLine, UserCog, Compass } from "lucide-react";
 import type { Analysis } from "@/lib/analyze.functions";
+import { AtsSimulator } from "./AtsSimulator";
+import { RecruiterView } from "./RecruiterView";
+import { CareerRoadmap } from "./CareerRoadmap";
 
 export function Results({ data, onReset }: { data: Analysis; onReset: () => void }) {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold">Analysis Results</h2>
+        <button onClick={onReset} className="text-sm text-primary hover:underline">
+          ← New analysis
+        </button>
+      </div>
+
+      <Tabs defaultValue="overview" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
+          <TabsTrigger value="overview" className="gap-1.5">
+            <Target className="h-4 w-4" />
+            <span className="hidden sm:inline">Overview</span>
+          </TabsTrigger>
+          <TabsTrigger value="ats" className="gap-1.5">
+            <ScanLine className="h-4 w-4" />
+            <span className="hidden sm:inline">ATS Simulator</span>
+            <span className="sm:hidden">ATS</span>
+          </TabsTrigger>
+          <TabsTrigger value="recruiter" className="gap-1.5">
+            <UserCog className="h-4 w-4" />
+            <span className="hidden sm:inline">Recruiter View</span>
+            <span className="sm:hidden">Recruiter</span>
+          </TabsTrigger>
+          <TabsTrigger value="roadmap" className="gap-1.5">
+            <Compass className="h-4 w-4" />
+            <span className="hidden sm:inline">Career Roadmap</span>
+            <span className="sm:hidden">Roadmap</span>
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
+          <Overview data={data} />
+        </TabsContent>
+        <TabsContent value="ats">
+          <AtsSimulator data={data.ats_simulation} />
+        </TabsContent>
+        <TabsContent value="recruiter">
+          <RecruiterView data={data.recruiter_view} />
+        </TabsContent>
+        <TabsContent value="roadmap">
+          <CareerRoadmap data={data.career_roadmap} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+
+function Overview({ data }: { data: Analysis }) {
   const matched = data.gap_analysis.filter((g) => g.in_resume && g.required).length;
   const missing = data.gap_analysis.filter((g) => !g.in_resume && g.required).length;
   const bonus = data.gap_analysis.filter((g) => g.in_resume && !g.required).length;
@@ -18,14 +72,7 @@ export function Results({ data, onReset }: { data: Analysis; onReset: () => void
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">Analysis Results</h2>
-        <button onClick={onReset} className="text-sm text-primary hover:underline">
-          ← New analysis
-        </button>
-      </div>
-
+    <>
       <div className="grid gap-4 md:grid-cols-4">
         <ScoreCard icon={<Target className="h-5 w-5" />} label="Overall Score" value={data.overall_score} showProgress />
         <ScoreCard icon={<Award className="h-5 w-5" />} label="Skill Score" value={data.skill_score} showProgress />
@@ -102,7 +149,7 @@ export function Results({ data, onReset }: { data: Analysis; onReset: () => void
           ))}
         </div>
       </Card>
-    </div>
+    </>
   );
 }
 
