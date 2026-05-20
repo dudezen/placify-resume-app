@@ -9,7 +9,7 @@ type Roadmap = Analysis["career_roadmap"];
 
 const priorityMeta = {
   critical: { label: "Critical", cls: "bg-destructive/10 text-destructive border-destructive/30" },
-  high: { label: "High", cls: "bg-[oklch(var(--warning)/0.15)] text-[oklch(0.45_0.08_100)] border-[oklch(var(--warning)/0.3)]" },
+  high: { label: "High", cls: "bg-[oklch(var(--warning)/0.15)] text-[color:oklch(0.4_0.12_75)] border-[oklch(var(--warning)/0.3)]" },
   medium: { label: "Medium", cls: "bg-accent text-accent-foreground border-border" },
 } as const;
 
@@ -117,7 +117,7 @@ function SkillTrack({ track, index }: { track: Roadmap[number]; index: number })
           </div>
           <div className="flex flex-wrap gap-2">
             {track.resources.map((r, i) => (
-              <Badge key={i} variant="outline" className="bg-card text-primary px-3 py-1.5 font-normal">
+              <Badge key={i} variant="outline" className="bg-accent/40 px-3 py-1.5 font-normal">
                 {r}
               </Badge>
             ))}

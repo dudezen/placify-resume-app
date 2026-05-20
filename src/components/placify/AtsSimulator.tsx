@@ -7,21 +7,21 @@ import type { Analysis } from "@/lib/analyze.functions";
 type Ats = Analysis["ats_simulation"];
 
 const verdictMeta = {
-  pass: { label: "Likely Pass", cls: "bg-[oklch(var(--success)/0.15)] text-primary border-[oklch(var(--success)/0.3)]", icon: CheckCircle2 },
-  borderline: { label: "Borderline", cls: "bg-[oklch(var(--warning)/0.15)] text-[oklch(0.45_0.08_100)] border-[oklch(var(--warning)/0.3)]", icon: AlertTriangle },
+  pass: { label: "Likely Pass", cls: "bg-[oklch(var(--success)/0.15)] text-[color:oklch(0.4_0.12_155)] border-[oklch(var(--success)/0.3)]", icon: CheckCircle2 },
+  borderline: { label: "Borderline", cls: "bg-[oklch(var(--warning)/0.15)] text-[color:oklch(0.4_0.12_75)] border-[oklch(var(--warning)/0.3)]", icon: AlertTriangle },
   reject: { label: "Likely Rejected", cls: "bg-destructive/10 text-destructive border-destructive/30", icon: XCircle },
 } as const;
 
 const statusMeta: Record<Ats["keyword_matches"][number]["status"], { label: string; cls: string }> = {
-  good: { label: "Good", cls: "bg-[oklch(var(--success)/0.15)] text-primary border-[oklch(var(--success)/0.3)]" },
-  low: { label: "Low", cls: "bg-[oklch(var(--warning)/0.15)] text-[oklch(0.45_0.08_100)] border-[oklch(var(--warning)/0.3)]" },
+  good: { label: "Good", cls: "bg-[oklch(var(--success)/0.15)] text-[color:oklch(0.4_0.12_155)] border-[oklch(var(--success)/0.3)]" },
+  low: { label: "Low", cls: "bg-[oklch(var(--warning)/0.15)] text-[color:oklch(0.4_0.12_75)] border-[oklch(var(--warning)/0.3)]" },
   missing: { label: "Missing", cls: "bg-destructive/10 text-destructive border-destructive/30" },
   stuffed: { label: "Stuffed", cls: "bg-muted text-muted-foreground border-border" },
 };
 
 const severityIcon = {
   info: <Info className="h-4 w-4 text-muted-foreground" />,
-  warn: <AlertTriangle className="h-4 w-4 text-[oklch(0.55_0.10_100)]" />,
+  warn: <AlertTriangle className="h-4 w-4 text-[color:oklch(0.55_0.16_75)]" />,
   error: <XCircle className="h-4 w-4 text-destructive" />,
 } as const;
 
@@ -121,7 +121,7 @@ export function AtsSimulator({ data }: { data: Ats }) {
               <dt className="text-xs uppercase tracking-wider text-muted-foreground">Skills</dt>
               <dd className="mt-2 flex flex-wrap gap-1.5">
                 {data.extracted_fields.skills.map((s, i) => (
-                  <Badge key={i} variant="outline" className="bg-card text-primary">{s}</Badge>
+                  <Badge key={i} variant="outline" className="bg-accent/40">{s}</Badge>
                 ))}
               </dd>
             </div>
