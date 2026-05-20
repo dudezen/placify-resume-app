@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "placify" },
+      { name: "description", content: "Placify is an AI-powered resume parser built for modern hiring. Upload any resume and Placify instantly extracts, organizes, and structures candidate data" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "placify" },
+      { property: "og:description", content: "Placify is an AI-powered resume parser built for modern hiring. Upload any resume and Placify instantly extracts, organizes, and structures candidate data" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "placify" },
+      { name: "twitter:description", content: "Placify is an AI-powered resume parser built for modern hiring. Upload any resume and Placify instantly extracts, organizes, and structures candidate data" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a324278-9823-47a6-8797-823dd79a424b/id-preview-656bfabc--905a0b15-7062-45c3-a350-7cdcc3988240.lovable.app-1779306660926.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a324278-9823-47a6-8797-823dd79a424b/id-preview-656bfabc--905a0b15-7062-45c3-a350-7cdcc3988240.lovable.app-1779306660926.png" },
     ],
     links: [
       {
