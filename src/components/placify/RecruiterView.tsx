@@ -8,12 +8,12 @@ type Rec = Analysis["recruiter_view"];
 const decisionMeta = {
   yes: {
     label: "Would Interview",
-    cls: "bg-[oklch(var(--success)/0.15)] text-[color:oklch(0.4_0.12_155)] border-[oklch(var(--success)/0.3)]",
+    cls: "bg-[oklch(var(--success)/0.15)] text-primary border-[oklch(var(--success)/0.3)]",
     icon: ThumbsUp,
   },
   maybe: {
     label: "On the Fence",
-    cls: "bg-[oklch(var(--warning)/0.15)] text-[color:oklch(0.4_0.12_75)] border-[oklch(var(--warning)/0.3)]",
+    cls: "bg-[oklch(var(--warning)/0.15)] text-[oklch(0.45_0.08_100)] border-[oklch(var(--warning)/0.3)]",
     icon: HelpCircle,
   },
   no: {

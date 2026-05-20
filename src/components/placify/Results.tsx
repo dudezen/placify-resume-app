@@ -65,7 +65,7 @@ function Overview({ data }: { data: Analysis }) {
 
   const statusOf = (g: { in_resume: boolean; required: boolean }) => {
     if (g.in_resume && g.required)
-      return { label: "Matched", cls: "bg-[oklch(0.65_0.15_155/0.15)] text-[oklch(0.45_0.12_155)] border-[oklch(0.65_0.15_155/0.3)]" };
+      return { label: "Matched", cls: "bg-[oklch(var(--success)/0.15)] text-primary border-[oklch(var(--success)/0.3)]" };
     if (!g.in_resume && g.required)
       return { label: "Missing", cls: "bg-destructive/10 text-destructive border-destructive/30" };
     return { label: "Bonus", cls: "bg-accent text-accent-foreground border-border" };
