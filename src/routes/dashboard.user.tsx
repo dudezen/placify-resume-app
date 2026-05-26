@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   FileText,
@@ -27,9 +27,5 @@ export const Route = createFileRoute("/dashboard/user")({
 });
 
 function UserLayout() {
-  return (
-    <DashboardShell role="user" items={items} brandLabel="Job Seeker">
-      <Outlet />
-    </DashboardShell>
-  );
+  return <DashboardShell role="user" items={items} brandLabel="Job Seeker" />;
 }

@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   XCircle,
   TrendingUp,
+  Briefcase,
 } from "lucide-react";
 import { lastAnalysis } from "@/lib/local-store";
 import type { Analysis } from "@/lib/analyze.functions";
@@ -188,6 +189,3 @@ function EmptyState() {
     </div>
   );
 }
-
-// Avoid unused import warning when component compiles without using Briefcase elsewhere
-import { Briefcase } from "lucide-react";
