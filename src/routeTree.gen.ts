@@ -9,38 +9,324 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AnalyzeRouteImport } from './routes/analyze'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardUserRouteImport } from './routes/dashboard.user'
+import { Route as DashboardRecruiterRouteImport } from './routes/dashboard.recruiter'
+import { Route as DashboardUserIndexRouteImport } from './routes/dashboard.user.index'
+import { Route as DashboardRecruiterIndexRouteImport } from './routes/dashboard.recruiter.index'
+import { Route as DashboardUserSettingsRouteImport } from './routes/dashboard.user.settings'
+import { Route as DashboardUserSavedRouteImport } from './routes/dashboard.user.saved'
+import { Route as DashboardUserRoadmapsRouteImport } from './routes/dashboard.user.roadmaps'
+import { Route as DashboardUserResumeRouteImport } from './routes/dashboard.user.resume'
+import { Route as DashboardUserMatchesRouteImport } from './routes/dashboard.user.matches'
+import { Route as DashboardUserAtsRouteImport } from './routes/dashboard.user.ats'
+import { Route as DashboardUserApplicationsRouteImport } from './routes/dashboard.user.applications'
+import { Route as DashboardRecruiterShortlistedRouteImport } from './routes/dashboard.recruiter.shortlisted'
+import { Route as DashboardRecruiterSettingsRouteImport } from './routes/dashboard.recruiter.settings'
+import { Route as DashboardRecruiterReviewsRouteImport } from './routes/dashboard.recruiter.reviews'
+import { Route as DashboardRecruiterInsightsRouteImport } from './routes/dashboard.recruiter.insights'
+import { Route as DashboardRecruiterCandidatesRouteImport } from './routes/dashboard.recruiter.candidates'
+import { Route as DashboardRecruiterJobsIndexRouteImport } from './routes/dashboard.recruiter.jobs.index'
+import { Route as DashboardRecruiterJobsNewRouteImport } from './routes/dashboard.recruiter.jobs.new'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyzeRoute = AnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardUserRoute = DashboardUserRouteImport.update({
+  id: '/dashboard/user',
+  path: '/dashboard/user',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRecruiterRoute = DashboardRecruiterRouteImport.update({
+  id: '/dashboard/recruiter',
+  path: '/dashboard/recruiter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardUserIndexRoute = DashboardUserIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardRecruiterIndexRoute = DashboardRecruiterIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRecruiterRoute,
+} as any)
+const DashboardUserSettingsRoute = DashboardUserSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserSavedRoute = DashboardUserSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserRoadmapsRoute = DashboardUserRoadmapsRouteImport.update({
+  id: '/roadmaps',
+  path: '/roadmaps',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserResumeRoute = DashboardUserResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserMatchesRoute = DashboardUserMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserAtsRoute = DashboardUserAtsRouteImport.update({
+  id: '/ats',
+  path: '/ats',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserApplicationsRoute =
+  DashboardUserApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => DashboardUserRoute,
+  } as any)
+const DashboardRecruiterShortlistedRoute =
+  DashboardRecruiterShortlistedRouteImport.update({
+    id: '/shortlisted',
+    path: '/shortlisted',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterSettingsRoute =
+  DashboardRecruiterSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterReviewsRoute =
+  DashboardRecruiterReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterInsightsRoute =
+  DashboardRecruiterInsightsRouteImport.update({
+    id: '/insights',
+    path: '/insights',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterCandidatesRoute =
+  DashboardRecruiterCandidatesRouteImport.update({
+    id: '/candidates',
+    path: '/candidates',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterJobsIndexRoute =
+  DashboardRecruiterJobsIndexRouteImport.update({
+    id: '/jobs/',
+    path: '/jobs/',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
+const DashboardRecruiterJobsNewRoute =
+  DashboardRecruiterJobsNewRouteImport.update({
+    id: '/jobs/new',
+    path: '/jobs/new',
+    getParentRoute: () => DashboardRecruiterRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analyze': typeof AnalyzeRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/dashboard/recruiter': typeof DashboardRecruiterRouteWithChildren
+  '/dashboard/user': typeof DashboardUserRouteWithChildren
+  '/dashboard/recruiter/candidates': typeof DashboardRecruiterCandidatesRoute
+  '/dashboard/recruiter/insights': typeof DashboardRecruiterInsightsRoute
+  '/dashboard/recruiter/reviews': typeof DashboardRecruiterReviewsRoute
+  '/dashboard/recruiter/settings': typeof DashboardRecruiterSettingsRoute
+  '/dashboard/recruiter/shortlisted': typeof DashboardRecruiterShortlistedRoute
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/recruiter/': typeof DashboardRecruiterIndexRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
+  '/dashboard/recruiter/jobs/new': typeof DashboardRecruiterJobsNewRoute
+  '/dashboard/recruiter/jobs/': typeof DashboardRecruiterJobsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analyze': typeof AnalyzeRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/dashboard/recruiter/candidates': typeof DashboardRecruiterCandidatesRoute
+  '/dashboard/recruiter/insights': typeof DashboardRecruiterInsightsRoute
+  '/dashboard/recruiter/reviews': typeof DashboardRecruiterReviewsRoute
+  '/dashboard/recruiter/settings': typeof DashboardRecruiterSettingsRoute
+  '/dashboard/recruiter/shortlisted': typeof DashboardRecruiterShortlistedRoute
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/recruiter': typeof DashboardRecruiterIndexRoute
+  '/dashboard/user': typeof DashboardUserIndexRoute
+  '/dashboard/recruiter/jobs/new': typeof DashboardRecruiterJobsNewRoute
+  '/dashboard/recruiter/jobs': typeof DashboardRecruiterJobsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analyze': typeof AnalyzeRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/dashboard/recruiter': typeof DashboardRecruiterRouteWithChildren
+  '/dashboard/user': typeof DashboardUserRouteWithChildren
+  '/dashboard/recruiter/candidates': typeof DashboardRecruiterCandidatesRoute
+  '/dashboard/recruiter/insights': typeof DashboardRecruiterInsightsRoute
+  '/dashboard/recruiter/reviews': typeof DashboardRecruiterReviewsRoute
+  '/dashboard/recruiter/settings': typeof DashboardRecruiterSettingsRoute
+  '/dashboard/recruiter/shortlisted': typeof DashboardRecruiterShortlistedRoute
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/recruiter/': typeof DashboardRecruiterIndexRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
+  '/dashboard/recruiter/jobs/new': typeof DashboardRecruiterJobsNewRoute
+  '/dashboard/recruiter/jobs/': typeof DashboardRecruiterJobsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/recruiter'
+    | '/dashboard/user'
+    | '/dashboard/recruiter/candidates'
+    | '/dashboard/recruiter/insights'
+    | '/dashboard/recruiter/reviews'
+    | '/dashboard/recruiter/settings'
+    | '/dashboard/recruiter/shortlisted'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/recruiter/'
+    | '/dashboard/user/'
+    | '/dashboard/recruiter/jobs/new'
+    | '/dashboard/recruiter/jobs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/recruiter/candidates'
+    | '/dashboard/recruiter/insights'
+    | '/dashboard/recruiter/reviews'
+    | '/dashboard/recruiter/settings'
+    | '/dashboard/recruiter/shortlisted'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/recruiter'
+    | '/dashboard/user'
+    | '/dashboard/recruiter/jobs/new'
+    | '/dashboard/recruiter/jobs'
+  id:
+    | '__root__'
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/recruiter'
+    | '/dashboard/user'
+    | '/dashboard/recruiter/candidates'
+    | '/dashboard/recruiter/insights'
+    | '/dashboard/recruiter/reviews'
+    | '/dashboard/recruiter/settings'
+    | '/dashboard/recruiter/shortlisted'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/recruiter/'
+    | '/dashboard/user/'
+    | '/dashboard/recruiter/jobs/new'
+    | '/dashboard/recruiter/jobs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyzeRoute: typeof AnalyzeRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  DashboardRecruiterRoute: typeof DashboardRecruiterRouteWithChildren
+  DashboardUserRoute: typeof DashboardUserRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analyze': {
+      id: '/analyze'
+      path: '/analyze'
+      fullPath: '/analyze'
+      preLoaderRoute: typeof AnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +334,194 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/user': {
+      id: '/dashboard/user'
+      path: '/dashboard/user'
+      fullPath: '/dashboard/user'
+      preLoaderRoute: typeof DashboardUserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/recruiter': {
+      id: '/dashboard/recruiter'
+      path: '/dashboard/recruiter'
+      fullPath: '/dashboard/recruiter'
+      preLoaderRoute: typeof DashboardRecruiterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/user/': {
+      id: '/dashboard/user/'
+      path: '/'
+      fullPath: '/dashboard/user/'
+      preLoaderRoute: typeof DashboardUserIndexRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/recruiter/': {
+      id: '/dashboard/recruiter/'
+      path: '/'
+      fullPath: '/dashboard/recruiter/'
+      preLoaderRoute: typeof DashboardRecruiterIndexRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/user/settings': {
+      id: '/dashboard/user/settings'
+      path: '/settings'
+      fullPath: '/dashboard/user/settings'
+      preLoaderRoute: typeof DashboardUserSettingsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/saved': {
+      id: '/dashboard/user/saved'
+      path: '/saved'
+      fullPath: '/dashboard/user/saved'
+      preLoaderRoute: typeof DashboardUserSavedRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/roadmaps': {
+      id: '/dashboard/user/roadmaps'
+      path: '/roadmaps'
+      fullPath: '/dashboard/user/roadmaps'
+      preLoaderRoute: typeof DashboardUserRoadmapsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/resume': {
+      id: '/dashboard/user/resume'
+      path: '/resume'
+      fullPath: '/dashboard/user/resume'
+      preLoaderRoute: typeof DashboardUserResumeRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/matches': {
+      id: '/dashboard/user/matches'
+      path: '/matches'
+      fullPath: '/dashboard/user/matches'
+      preLoaderRoute: typeof DashboardUserMatchesRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/ats': {
+      id: '/dashboard/user/ats'
+      path: '/ats'
+      fullPath: '/dashboard/user/ats'
+      preLoaderRoute: typeof DashboardUserAtsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/applications': {
+      id: '/dashboard/user/applications'
+      path: '/applications'
+      fullPath: '/dashboard/user/applications'
+      preLoaderRoute: typeof DashboardUserApplicationsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/recruiter/shortlisted': {
+      id: '/dashboard/recruiter/shortlisted'
+      path: '/shortlisted'
+      fullPath: '/dashboard/recruiter/shortlisted'
+      preLoaderRoute: typeof DashboardRecruiterShortlistedRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/settings': {
+      id: '/dashboard/recruiter/settings'
+      path: '/settings'
+      fullPath: '/dashboard/recruiter/settings'
+      preLoaderRoute: typeof DashboardRecruiterSettingsRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/reviews': {
+      id: '/dashboard/recruiter/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/recruiter/reviews'
+      preLoaderRoute: typeof DashboardRecruiterReviewsRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/insights': {
+      id: '/dashboard/recruiter/insights'
+      path: '/insights'
+      fullPath: '/dashboard/recruiter/insights'
+      preLoaderRoute: typeof DashboardRecruiterInsightsRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/candidates': {
+      id: '/dashboard/recruiter/candidates'
+      path: '/candidates'
+      fullPath: '/dashboard/recruiter/candidates'
+      preLoaderRoute: typeof DashboardRecruiterCandidatesRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/jobs/': {
+      id: '/dashboard/recruiter/jobs/'
+      path: '/jobs'
+      fullPath: '/dashboard/recruiter/jobs/'
+      preLoaderRoute: typeof DashboardRecruiterJobsIndexRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
+    '/dashboard/recruiter/jobs/new': {
+      id: '/dashboard/recruiter/jobs/new'
+      path: '/jobs/new'
+      fullPath: '/dashboard/recruiter/jobs/new'
+      preLoaderRoute: typeof DashboardRecruiterJobsNewRouteImport
+      parentRoute: typeof DashboardRecruiterRoute
+    }
   }
 }
 
+interface DashboardRecruiterRouteChildren {
+  DashboardRecruiterCandidatesRoute: typeof DashboardRecruiterCandidatesRoute
+  DashboardRecruiterInsightsRoute: typeof DashboardRecruiterInsightsRoute
+  DashboardRecruiterReviewsRoute: typeof DashboardRecruiterReviewsRoute
+  DashboardRecruiterSettingsRoute: typeof DashboardRecruiterSettingsRoute
+  DashboardRecruiterShortlistedRoute: typeof DashboardRecruiterShortlistedRoute
+  DashboardRecruiterIndexRoute: typeof DashboardRecruiterIndexRoute
+  DashboardRecruiterJobsNewRoute: typeof DashboardRecruiterJobsNewRoute
+  DashboardRecruiterJobsIndexRoute: typeof DashboardRecruiterJobsIndexRoute
+}
+
+const DashboardRecruiterRouteChildren: DashboardRecruiterRouteChildren = {
+  DashboardRecruiterCandidatesRoute: DashboardRecruiterCandidatesRoute,
+  DashboardRecruiterInsightsRoute: DashboardRecruiterInsightsRoute,
+  DashboardRecruiterReviewsRoute: DashboardRecruiterReviewsRoute,
+  DashboardRecruiterSettingsRoute: DashboardRecruiterSettingsRoute,
+  DashboardRecruiterShortlistedRoute: DashboardRecruiterShortlistedRoute,
+  DashboardRecruiterIndexRoute: DashboardRecruiterIndexRoute,
+  DashboardRecruiterJobsNewRoute: DashboardRecruiterJobsNewRoute,
+  DashboardRecruiterJobsIndexRoute: DashboardRecruiterJobsIndexRoute,
+}
+
+const DashboardRecruiterRouteWithChildren =
+  DashboardRecruiterRoute._addFileChildren(DashboardRecruiterRouteChildren)
+
+interface DashboardUserRouteChildren {
+  DashboardUserApplicationsRoute: typeof DashboardUserApplicationsRoute
+  DashboardUserAtsRoute: typeof DashboardUserAtsRoute
+  DashboardUserMatchesRoute: typeof DashboardUserMatchesRoute
+  DashboardUserResumeRoute: typeof DashboardUserResumeRoute
+  DashboardUserRoadmapsRoute: typeof DashboardUserRoadmapsRoute
+  DashboardUserSavedRoute: typeof DashboardUserSavedRoute
+  DashboardUserSettingsRoute: typeof DashboardUserSettingsRoute
+  DashboardUserIndexRoute: typeof DashboardUserIndexRoute
+}
+
+const DashboardUserRouteChildren: DashboardUserRouteChildren = {
+  DashboardUserApplicationsRoute: DashboardUserApplicationsRoute,
+  DashboardUserAtsRoute: DashboardUserAtsRoute,
+  DashboardUserMatchesRoute: DashboardUserMatchesRoute,
+  DashboardUserResumeRoute: DashboardUserResumeRoute,
+  DashboardUserRoadmapsRoute: DashboardUserRoadmapsRoute,
+  DashboardUserSavedRoute: DashboardUserSavedRoute,
+  DashboardUserSettingsRoute: DashboardUserSettingsRoute,
+  DashboardUserIndexRoute: DashboardUserIndexRoute,
+}
+
+const DashboardUserRouteWithChildren = DashboardUserRoute._addFileChildren(
+  DashboardUserRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyzeRoute: AnalyzeRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  DashboardRecruiterRoute: DashboardRecruiterRouteWithChildren,
+  DashboardUserRoute: DashboardUserRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
