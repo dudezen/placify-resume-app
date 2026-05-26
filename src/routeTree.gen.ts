@@ -13,6 +13,15 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AnalyzeRouteImport } from './routes/analyze'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardUserRouteImport } from './routes/dashboard.user'
+import { Route as DashboardUserIndexRouteImport } from './routes/dashboard.user.index'
+import { Route as DashboardUserSettingsRouteImport } from './routes/dashboard.user.settings'
+import { Route as DashboardUserSavedRouteImport } from './routes/dashboard.user.saved'
+import { Route as DashboardUserRoadmapsRouteImport } from './routes/dashboard.user.roadmaps'
+import { Route as DashboardUserResumeRouteImport } from './routes/dashboard.user.resume'
+import { Route as DashboardUserMatchesRouteImport } from './routes/dashboard.user.matches'
+import { Route as DashboardUserAtsRouteImport } from './routes/dashboard.user.ats'
+import { Route as DashboardUserApplicationsRouteImport } from './routes/dashboard.user.applications'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -34,18 +43,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardUserRoute = DashboardUserRouteImport.update({
+  id: '/dashboard/user',
+  path: '/dashboard/user',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardUserIndexRoute = DashboardUserIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserSettingsRoute = DashboardUserSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserSavedRoute = DashboardUserSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserRoadmapsRoute = DashboardUserRoadmapsRouteImport.update({
+  id: '/roadmaps',
+  path: '/roadmaps',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserResumeRoute = DashboardUserResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserMatchesRoute = DashboardUserMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserAtsRoute = DashboardUserAtsRouteImport.update({
+  id: '/ats',
+  path: '/ats',
+  getParentRoute: () => DashboardUserRoute,
+} as any)
+const DashboardUserApplicationsRoute =
+  DashboardUserApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => DashboardUserRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analyze': typeof AnalyzeRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/user': typeof DashboardUserRouteWithChildren
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analyze': typeof AnalyzeRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/user': typeof DashboardUserIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +125,61 @@ export interface FileRoutesById {
   '/analyze': typeof AnalyzeRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/user': typeof DashboardUserRouteWithChildren
+  '/dashboard/user/applications': typeof DashboardUserApplicationsRoute
+  '/dashboard/user/ats': typeof DashboardUserAtsRoute
+  '/dashboard/user/matches': typeof DashboardUserMatchesRoute
+  '/dashboard/user/resume': typeof DashboardUserResumeRoute
+  '/dashboard/user/roadmaps': typeof DashboardUserRoadmapsRoute
+  '/dashboard/user/saved': typeof DashboardUserSavedRoute
+  '/dashboard/user/settings': typeof DashboardUserSettingsRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analyze' | '/login' | '/register'
+  fullPaths:
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/user'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/user/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analyze' | '/login' | '/register'
-  id: '__root__' | '/' | '/analyze' | '/login' | '/register'
+  to:
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/user'
+  id:
+    | '__root__'
+    | '/'
+    | '/analyze'
+    | '/login'
+    | '/register'
+    | '/dashboard/user'
+    | '/dashboard/user/applications'
+    | '/dashboard/user/ats'
+    | '/dashboard/user/matches'
+    | '/dashboard/user/resume'
+    | '/dashboard/user/roadmaps'
+    | '/dashboard/user/saved'
+    | '/dashboard/user/settings'
+    | '/dashboard/user/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +187,7 @@ export interface RootRouteChildren {
   AnalyzeRoute: typeof AnalyzeRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  DashboardUserRoute: typeof DashboardUserRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -99,14 +220,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/user': {
+      id: '/dashboard/user'
+      path: '/dashboard/user'
+      fullPath: '/dashboard/user'
+      preLoaderRoute: typeof DashboardUserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/user/': {
+      id: '/dashboard/user/'
+      path: '/'
+      fullPath: '/dashboard/user/'
+      preLoaderRoute: typeof DashboardUserIndexRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/settings': {
+      id: '/dashboard/user/settings'
+      path: '/settings'
+      fullPath: '/dashboard/user/settings'
+      preLoaderRoute: typeof DashboardUserSettingsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/saved': {
+      id: '/dashboard/user/saved'
+      path: '/saved'
+      fullPath: '/dashboard/user/saved'
+      preLoaderRoute: typeof DashboardUserSavedRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/roadmaps': {
+      id: '/dashboard/user/roadmaps'
+      path: '/roadmaps'
+      fullPath: '/dashboard/user/roadmaps'
+      preLoaderRoute: typeof DashboardUserRoadmapsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/resume': {
+      id: '/dashboard/user/resume'
+      path: '/resume'
+      fullPath: '/dashboard/user/resume'
+      preLoaderRoute: typeof DashboardUserResumeRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/matches': {
+      id: '/dashboard/user/matches'
+      path: '/matches'
+      fullPath: '/dashboard/user/matches'
+      preLoaderRoute: typeof DashboardUserMatchesRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/ats': {
+      id: '/dashboard/user/ats'
+      path: '/ats'
+      fullPath: '/dashboard/user/ats'
+      preLoaderRoute: typeof DashboardUserAtsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
+    '/dashboard/user/applications': {
+      id: '/dashboard/user/applications'
+      path: '/applications'
+      fullPath: '/dashboard/user/applications'
+      preLoaderRoute: typeof DashboardUserApplicationsRouteImport
+      parentRoute: typeof DashboardUserRoute
+    }
   }
 }
+
+interface DashboardUserRouteChildren {
+  DashboardUserApplicationsRoute: typeof DashboardUserApplicationsRoute
+  DashboardUserAtsRoute: typeof DashboardUserAtsRoute
+  DashboardUserMatchesRoute: typeof DashboardUserMatchesRoute
+  DashboardUserResumeRoute: typeof DashboardUserResumeRoute
+  DashboardUserRoadmapsRoute: typeof DashboardUserRoadmapsRoute
+  DashboardUserSavedRoute: typeof DashboardUserSavedRoute
+  DashboardUserSettingsRoute: typeof DashboardUserSettingsRoute
+  DashboardUserIndexRoute: typeof DashboardUserIndexRoute
+}
+
+const DashboardUserRouteChildren: DashboardUserRouteChildren = {
+  DashboardUserApplicationsRoute: DashboardUserApplicationsRoute,
+  DashboardUserAtsRoute: DashboardUserAtsRoute,
+  DashboardUserMatchesRoute: DashboardUserMatchesRoute,
+  DashboardUserResumeRoute: DashboardUserResumeRoute,
+  DashboardUserRoadmapsRoute: DashboardUserRoadmapsRoute,
+  DashboardUserSavedRoute: DashboardUserSavedRoute,
+  DashboardUserSettingsRoute: DashboardUserSettingsRoute,
+  DashboardUserIndexRoute: DashboardUserIndexRoute,
+}
+
+const DashboardUserRouteWithChildren = DashboardUserRoute._addFileChildren(
+  DashboardUserRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyzeRoute: AnalyzeRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  DashboardUserRoute: DashboardUserRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
