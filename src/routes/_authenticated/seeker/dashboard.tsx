@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Briefcase, FileText, Compass } from "lucide-react";
@@ -9,7 +11,20 @@ export const Route = createFileRoute("/_authenticated/seeker/dashboard")({
 });
 
 function SeekerDashboard() {
-  const { profile } = useAuth();
+  const { profile, user } = useAuth();
+
+  const { data: stats } = useQuery({
+    queryKey: ["seeker-stats", user?.id],
+    enabled: !!user,
+    queryFn: async () => {
+      const [r, a] = await Promise.all([
+        supabase.from("resumes").select("id", { count: "exact", head: true }),
+        supabase.from("applications").select("id", { count: "exact", head: true }),
+      ]);
+      return { resumes: r.count ?? 0, applications: a.count ?? 0 };
+    },
+  });
+
   return (
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
@@ -23,9 +38,21 @@ function SeekerDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard icon={<FileText className="h-5 w-5" />} label="Resumes uploaded" value="0" />
-        <StatCard icon={<Briefcase className="h-5 w-5" />} label="Jobs analyzed" value="0" />
-        <StatCard icon={<Compass className="h-5 w-5" />} label="Roadmaps generated" value="0" />
+        <StatCard
+          icon={<FileText className="h-5 w-5" />}
+          label="Resumes uploaded"
+          value={String(stats?.resumes ?? 0)}
+        />
+        <StatCard
+          icon={<Briefcase className="h-5 w-5" />}
+          label="Applications"
+          value={String(stats?.applications ?? 0)}
+        />
+        <StatCard
+          icon={<Compass className="h-5 w-5" />}
+          label="Roadmaps generated"
+          value={String(stats?.applications ?? 0)}
+        />
       </div>
 
       <Card className="flex flex-col items-start gap-4 overflow-hidden bg-[image:var(--gradient-soft)] p-8 md:flex-row md:items-center md:justify-between">
@@ -40,9 +67,14 @@ function SeekerDashboard() {
             </p>
           </div>
         </div>
-        <Button asChild size="lg">
-          <Link to="/seeker/analyzer">Open Analyzer</Link>
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild size="lg" variant="outline">
+            <Link to="/seeker/jobs">Browse jobs</Link>
+          </Button>
+          <Button asChild size="lg">
+            <Link to="/seeker/analyzer">Open Analyzer</Link>
+          </Button>
+        </div>
       </Card>
     </div>
   );
