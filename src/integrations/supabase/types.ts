@@ -14,6 +14,111 @@ export type Database = {
   }
   public: {
     Tables: {
+      applications: {
+        Row: {
+          analysis: Json | null
+          ats_score: number | null
+          created_at: string
+          green_flags: Json
+          id: string
+          job_id: string
+          match_score: number | null
+          red_flags: Json
+          resume_id: string | null
+          seeker_id: string
+          status: Database["public"]["Enums"]["application_status"]
+          updated_at: string
+        }
+        Insert: {
+          analysis?: Json | null
+          ats_score?: number | null
+          created_at?: string
+          green_flags?: Json
+          id?: string
+          job_id: string
+          match_score?: number | null
+          red_flags?: Json
+          resume_id?: string | null
+          seeker_id: string
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+        }
+        Update: {
+          analysis?: Json | null
+          ats_score?: number | null
+          created_at?: string
+          green_flags?: Json
+          id?: string
+          job_id?: string
+          match_score?: number | null
+          red_flags?: Json
+          resume_id?: string | null
+          seeker_id?: string
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_resume_id_fkey"
+            columns: ["resume_id"]
+            isOneToOne: false
+            referencedRelation: "resumes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          company: string
+          created_at: string
+          description: string
+          employment_type: Database["public"]["Enums"]["employment_type"]
+          id: string
+          location: string | null
+          recruiter_id: string
+          salary_max: number | null
+          salary_min: number | null
+          status: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          description: string
+          employment_type?: Database["public"]["Enums"]["employment_type"]
+          id?: string
+          location?: string | null
+          recruiter_id: string
+          salary_max?: number | null
+          salary_min?: number | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          description?: string
+          employment_type?: Database["public"]["Enums"]["employment_type"]
+          id?: string
+          location?: string | null
+          recruiter_id?: string
+          salary_max?: number | null
+          salary_min?: number | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company_name: string | null
@@ -41,6 +146,39 @@ export type Database = {
         }
         Relationships: []
       }
+      resumes: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          id: string
+          is_primary: boolean
+          parsed_text: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          id?: string
+          is_primary?: boolean
+          parsed_text?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          is_primary?: boolean
+          parsed_text?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -49,6 +187,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      application_status:
+        | "submitted"
+        | "reviewed"
+        | "shortlisted"
+        | "rejected"
+        | "hired"
+      employment_type: "full_time" | "part_time" | "contract" | "internship"
+      job_status: "draft" | "published" | "closed"
       user_role: "seeker" | "recruiter"
     }
     CompositeTypes: {
@@ -177,6 +323,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      application_status: [
+        "submitted",
+        "reviewed",
+        "shortlisted",
+        "rejected",
+        "hired",
+      ],
+      employment_type: ["full_time", "part_time", "contract", "internship"],
+      job_status: ["draft", "published", "closed"],
       user_role: ["seeker", "recruiter"],
     },
   },
