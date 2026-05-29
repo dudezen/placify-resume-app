@@ -27,6 +27,7 @@ import { Route as AuthenticatedRecruiterJobsRouteImport } from './routes/_authen
 import { Route as AuthenticatedRecruiterDashboardRouteImport } from './routes/_authenticated/recruiter/dashboard'
 import { Route as AuthenticatedRecruiterApplicantsRouteImport } from './routes/_authenticated/recruiter/applicants'
 import { Route as AuthenticatedRecruiterAnalyzerRouteImport } from './routes/_authenticated/recruiter/analyzer'
+import { Route as AuthenticatedSeekerJobsJobIdRouteImport } from './routes/_authenticated/seeker/jobs.$jobId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -128,6 +129,12 @@ const AuthenticatedRecruiterAnalyzerRoute =
     path: '/analyzer',
     getParentRoute: () => AuthenticatedRecruiterRoute,
   } as any)
+const AuthenticatedSeekerJobsJobIdRoute =
+  AuthenticatedSeekerJobsJobIdRouteImport.update({
+    id: '/$jobId',
+    path: '/$jobId',
+    getParentRoute: () => AuthenticatedSeekerJobsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -143,10 +150,11 @@ export interface FileRoutesByFullPath {
   '/recruiter/settings': typeof AuthenticatedRecruiterSettingsRoute
   '/seeker/analyzer': typeof AuthenticatedSeekerAnalyzerRoute
   '/seeker/dashboard': typeof AuthenticatedSeekerDashboardRoute
-  '/seeker/jobs': typeof AuthenticatedSeekerJobsRoute
+  '/seeker/jobs': typeof AuthenticatedSeekerJobsRouteWithChildren
   '/seeker/profile': typeof AuthenticatedSeekerProfileRoute
   '/seeker/resumes': typeof AuthenticatedSeekerResumesRoute
   '/seeker/roadmaps': typeof AuthenticatedSeekerRoadmapsRoute
+  '/seeker/jobs/$jobId': typeof AuthenticatedSeekerJobsJobIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -162,10 +170,11 @@ export interface FileRoutesByTo {
   '/recruiter/settings': typeof AuthenticatedRecruiterSettingsRoute
   '/seeker/analyzer': typeof AuthenticatedSeekerAnalyzerRoute
   '/seeker/dashboard': typeof AuthenticatedSeekerDashboardRoute
-  '/seeker/jobs': typeof AuthenticatedSeekerJobsRoute
+  '/seeker/jobs': typeof AuthenticatedSeekerJobsRouteWithChildren
   '/seeker/profile': typeof AuthenticatedSeekerProfileRoute
   '/seeker/resumes': typeof AuthenticatedSeekerResumesRoute
   '/seeker/roadmaps': typeof AuthenticatedSeekerRoadmapsRoute
+  '/seeker/jobs/$jobId': typeof AuthenticatedSeekerJobsJobIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -183,10 +192,11 @@ export interface FileRoutesById {
   '/_authenticated/recruiter/settings': typeof AuthenticatedRecruiterSettingsRoute
   '/_authenticated/seeker/analyzer': typeof AuthenticatedSeekerAnalyzerRoute
   '/_authenticated/seeker/dashboard': typeof AuthenticatedSeekerDashboardRoute
-  '/_authenticated/seeker/jobs': typeof AuthenticatedSeekerJobsRoute
+  '/_authenticated/seeker/jobs': typeof AuthenticatedSeekerJobsRouteWithChildren
   '/_authenticated/seeker/profile': typeof AuthenticatedSeekerProfileRoute
   '/_authenticated/seeker/resumes': typeof AuthenticatedSeekerResumesRoute
   '/_authenticated/seeker/roadmaps': typeof AuthenticatedSeekerRoadmapsRoute
+  '/_authenticated/seeker/jobs/$jobId': typeof AuthenticatedSeekerJobsJobIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/seeker/profile'
     | '/seeker/resumes'
     | '/seeker/roadmaps'
+    | '/seeker/jobs/$jobId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/seeker/profile'
     | '/seeker/resumes'
     | '/seeker/roadmaps'
+    | '/seeker/jobs/$jobId'
   id:
     | '__root__'
     | '/'
@@ -247,6 +259,7 @@ export interface FileRouteTypes {
     | '/_authenticated/seeker/profile'
     | '/_authenticated/seeker/resumes'
     | '/_authenticated/seeker/roadmaps'
+    | '/_authenticated/seeker/jobs/$jobId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -384,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRecruiterAnalyzerRouteImport
       parentRoute: typeof AuthenticatedRecruiterRoute
     }
+    '/_authenticated/seeker/jobs/$jobId': {
+      id: '/_authenticated/seeker/jobs/$jobId'
+      path: '/$jobId'
+      fullPath: '/seeker/jobs/$jobId'
+      preLoaderRoute: typeof AuthenticatedSeekerJobsJobIdRouteImport
+      parentRoute: typeof AuthenticatedSeekerJobsRoute
+    }
   }
 }
 
@@ -412,10 +432,24 @@ const AuthenticatedRecruiterRouteWithChildren =
     AuthenticatedRecruiterRouteChildren,
   )
 
+interface AuthenticatedSeekerJobsRouteChildren {
+  AuthenticatedSeekerJobsJobIdRoute: typeof AuthenticatedSeekerJobsJobIdRoute
+}
+
+const AuthenticatedSeekerJobsRouteChildren: AuthenticatedSeekerJobsRouteChildren =
+  {
+    AuthenticatedSeekerJobsJobIdRoute: AuthenticatedSeekerJobsJobIdRoute,
+  }
+
+const AuthenticatedSeekerJobsRouteWithChildren =
+  AuthenticatedSeekerJobsRoute._addFileChildren(
+    AuthenticatedSeekerJobsRouteChildren,
+  )
+
 interface AuthenticatedSeekerRouteChildren {
   AuthenticatedSeekerAnalyzerRoute: typeof AuthenticatedSeekerAnalyzerRoute
   AuthenticatedSeekerDashboardRoute: typeof AuthenticatedSeekerDashboardRoute
-  AuthenticatedSeekerJobsRoute: typeof AuthenticatedSeekerJobsRoute
+  AuthenticatedSeekerJobsRoute: typeof AuthenticatedSeekerJobsRouteWithChildren
   AuthenticatedSeekerProfileRoute: typeof AuthenticatedSeekerProfileRoute
   AuthenticatedSeekerResumesRoute: typeof AuthenticatedSeekerResumesRoute
   AuthenticatedSeekerRoadmapsRoute: typeof AuthenticatedSeekerRoadmapsRoute
@@ -424,7 +458,7 @@ interface AuthenticatedSeekerRouteChildren {
 const AuthenticatedSeekerRouteChildren: AuthenticatedSeekerRouteChildren = {
   AuthenticatedSeekerAnalyzerRoute: AuthenticatedSeekerAnalyzerRoute,
   AuthenticatedSeekerDashboardRoute: AuthenticatedSeekerDashboardRoute,
-  AuthenticatedSeekerJobsRoute: AuthenticatedSeekerJobsRoute,
+  AuthenticatedSeekerJobsRoute: AuthenticatedSeekerJobsRouteWithChildren,
   AuthenticatedSeekerProfileRoute: AuthenticatedSeekerProfileRoute,
   AuthenticatedSeekerResumesRoute: AuthenticatedSeekerResumesRoute,
   AuthenticatedSeekerRoadmapsRoute: AuthenticatedSeekerRoadmapsRoute,
