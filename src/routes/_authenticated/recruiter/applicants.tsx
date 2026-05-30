@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -30,6 +30,8 @@ function Applicants() {
   const { user } = useAuth();
   const { job: selectedJob } = Route.useSearch();
   const qc = useQueryClient();
+  const navigate = useNavigate();
+
 
   const { data: jobs } = useQuery({
     queryKey: ["recruiter-jobs-min", user?.id],
@@ -115,13 +117,12 @@ function Applicants() {
         <div className="w-64">
           <Select
             value={selectedJob ?? "all"}
-            onValueChange={(v) => {
-              const url = new URL(window.location.href);
-              if (v === "all") url.searchParams.delete("job");
-              else url.searchParams.set("job", v);
-              window.history.replaceState({}, "", url.toString());
-              qc.invalidateQueries({ queryKey: ["recruiter-apps"] });
-            }}
+            onValueChange={(v) =>
+              navigate({
+                to: "/recruiter/applicants",
+                search: v === "all" ? {} : { job: v },
+              })
+            }
           >
             <SelectTrigger>
               <SelectValue placeholder="All jobs" />
