@@ -140,7 +140,8 @@ function JobDetail() {
               <Badge variant="secondary">{job.employment_type.replace("_", " ")}</Badge>
               {(job.salary_min || job.salary_max) && (
                 <Badge variant="outline">
-                  ${job.salary_min ?? "?"} – ${job.salary_max ?? "?"}
+                  {job.salary_currency === "INR" ? "₹" : "$"}
+                  {job.salary_min ?? "?"} – {job.salary_max ?? "?"}
                 </Badge>
               )}
             </div>
