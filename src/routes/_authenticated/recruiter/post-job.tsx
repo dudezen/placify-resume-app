@@ -36,6 +36,7 @@ function PostJob() {
     employment_type: "full_time" as EmploymentType,
     salary_min: "",
     salary_max: "",
+    salary_currency: "USD",
   });
 
   const submit = async (status: JobStatus) => {
@@ -54,6 +55,7 @@ function PostJob() {
       employment_type: form.employment_type,
       salary_min: form.salary_min ? Number(form.salary_min) : null,
       salary_max: form.salary_max ? Number(form.salary_max) : null,
+      salary_currency: form.salary_currency,
       status,
     });
     setSaving(false);
@@ -111,14 +113,28 @@ function PostJob() {
               </SelectContent>
             </Select>
           </Field>
-          <Field label="Salary min (USD)">
+          <Field label="Currency">
+            <Select
+              value={form.salary_currency}
+              onValueChange={(v) => setForm((f) => ({ ...f, salary_currency: v }))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="USD">USD ($)</SelectItem>
+                <SelectItem value="INR">INR (₹)</SelectItem>
+              </SelectContent>
+            </Select>
+          </Field>
+          <Field label={`Salary min (${form.salary_currency})`}>
             <Input
               type="number"
               value={form.salary_min}
               onChange={(e) => setForm((f) => ({ ...f, salary_min: e.target.value }))}
             />
           </Field>
-          <Field label="Salary max (USD)">
+          <Field label={`Salary max (${form.salary_currency})`}>
             <Input
               type="number"
               value={form.salary_max}
