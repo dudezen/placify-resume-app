@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/_authenticated/seeker/jobs")({
+export const Route = createFileRoute("/_authenticated/seeker/jobs/")({
   component: BrowseJobs,
 });
 
