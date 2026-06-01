@@ -19,6 +19,7 @@ interface JobRow {
   employment_type: string;
   salary_min: number | null;
   salary_max: number | null;
+  salary_currency: string | null;
   created_at: string;
 }
 
@@ -29,7 +30,7 @@ function BrowseJobs() {
       const { data, error } = await supabase
         .from("jobs")
         .select(
-          "id, title, company, location, description, employment_type, salary_min, salary_max, created_at",
+          "id, title, company, location, description, employment_type, salary_min, salary_max, salary_currency, created_at",
         )
         .eq("status", "published")
         .order("created_at", { ascending: false });
