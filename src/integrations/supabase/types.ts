@@ -83,6 +83,7 @@ export type Database = {
           id: string
           location: string | null
           recruiter_id: string
+          salary_currency: string
           salary_max: number | null
           salary_min: number | null
           status: Database["public"]["Enums"]["job_status"]
@@ -97,6 +98,7 @@ export type Database = {
           id?: string
           location?: string | null
           recruiter_id: string
+          salary_currency?: string
           salary_max?: number | null
           salary_min?: number | null
           status?: Database["public"]["Enums"]["job_status"]
@@ -111,6 +113,7 @@ export type Database = {
           id?: string
           location?: string | null
           recruiter_id?: string
+          salary_currency?: string
           salary_max?: number | null
           salary_min?: number | null
           status?: Database["public"]["Enums"]["job_status"]
